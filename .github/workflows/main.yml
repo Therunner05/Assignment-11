@@ -1,0 +1,31 @@
+name: Automated Output Testing
+
+on: [push]
+
+jobs:
+  test-application:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Run Test Case 1 (10 Numbers)
+        run: |
+          python find_lowest_number.py test1_input.txt test1_actual.txt
+          diff test1_actual.txt test1_expected.txt
+
+      - name: Run Test Case 2 (1 Number)
+        run: |
+          python find_lowest_number.py test2_input.txt test2_actual.txt
+          diff test2_actual.txt test2_expected.txt
+
+      - name: Run Test Case 3 (Blank File)
+        run: |
+          python find_lowest_number.py test3_input.txt test3_actual.txt
+          diff test3_actual.txt test3_expected.txty test_data/test3_input.txt test3_actual.txt
+          diff test3_actual.txt test_data/test3_expected.txt
